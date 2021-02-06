@@ -1,3 +1,15 @@
 .playlist {
-  display: block;
+  margin-bottom: 1rem;
+  button {
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    text-align: left;
+    border: 0;
+    width: 100%;
+    cursor: pointer;
+    font-family: 'Lora', serif;
+    color: var(--theme-page-text);
+    background-color: var(--theme-page-background);
+  }
 }
