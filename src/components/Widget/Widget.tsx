@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Playlist from './Playlist';
+import style from './Widget.module.scss';
+import Playlist from './Playlist/Playlist';
 
 const Widget = ({ playListIDs }: { playListIDs: string[] }) => {
   const [error, setError] = useState('');
@@ -45,12 +46,12 @@ const Widget = ({ playListIDs }: { playListIDs: string[] }) => {
   }, [getPlaylistData]);
 
   return (
-    <>
+    <div className={style.widget}>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {!error && playlists.map((playlist: any) => (
         <Playlist key={playlist.id} playlist={playlist} />
       ))}
-    </>
+    </div>
   );
 };
 
