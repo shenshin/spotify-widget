@@ -7,3 +7,25 @@
     border-bottom: none;
   }
 }
+.bigButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  div {
+    width: 6rem;
+    margin-bottom: 0.5rem;
+
+    h3 {
+      width: max-content;
+    }
+    img {
+      width: 100%;
+      border-radius: 0.3rem;
+    }
+  }
+
+  h1 {
+    margin: auto;
+  }
+}
