@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import style from './Playlist.module.scss';
 import Tracklist from '../Tracklist/Tracklist';
+import style from './Playlist.module.scss';
 
 const Playlist = ({ playlist }: { playlist: any }) => {
   const {
@@ -15,12 +15,22 @@ const Playlist = ({ playlist }: { playlist: any }) => {
 
   return (
     <div className={style.playlist}>
-      <div onClick={showTracks} onKeyDown={showTracks} role="button" tabIndex={-1}>
-        <h1>{name}</h1>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img style={{ width: 100, height: 100 }} src={imageURL} alt={description} />
-          <h2 style={{ marginLeft: 10 }}>{`${items.length} tracks`}</h2>
+      <div
+        onClick={showTracks}
+        onKeyDown={() => {}}
+        role="button"
+        tabIndex={-1}
+        style={{
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ width: '6rem', marginBottom: '0.5rem' }}>
+          <h3 style={{ width: 'max-content' }}>{`${items.length} tracks`}</h3>
+          <img style={{ width: '100%' }} src={imageURL} alt={description} />
         </div>
+        <h1 style={{ margin: 'auto' }}>{name}</h1>
       </div>
       {tracksVisible && <Tracklist tracks={items} />}
     </div>
