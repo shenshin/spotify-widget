@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Tracklist from '../Tracklist/Tracklist';
 import style from './Playlist.module.scss';
 import PlaylistType from './PlaylistType';
+import ArtistType from '../Artist/ArtistType';
 
 const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
   const {
@@ -9,9 +10,15 @@ const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
   } = playlist;
 
   const [tracksVisible, setTracksVisible] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState<ArtistType>();
 
   const showTracks = () => {
     setTracksVisible(!tracksVisible);
+    setSelectedArtist(undefined);
+  };
+
+  const showArtist = (artist: ArtistType) => {
+    setSelectedArtist(artist);
   };
 
   return (
@@ -28,8 +35,14 @@ const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
           <img src={imageURL} alt={description} />
         </div>
         <h1>{name}</h1>
+        {selectedArtist && <p>{selectedArtist.name}</p>}
       </div>
-      {tracksVisible && <Tracklist tracks={items.map((item) => item.track)} />}
+      {tracksVisible && (
+      <Tracklist
+        showArtist={showArtist}
+        tracks={items.map((item) => item.track)}
+      />
+      )}
     </div>
   );
 };
