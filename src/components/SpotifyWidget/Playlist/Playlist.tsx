@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Tracklist from '../Tracklist/Tracklist';
 import style from './Playlist.module.scss';
+import PlaylistType from './PlaylistType';
 
-const Playlist = ({ playlist }: { playlist: any }) => {
+const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
   const {
     name, description, images: [{ url: imageURL }], tracks: { items },
   } = playlist;
@@ -32,7 +33,7 @@ const Playlist = ({ playlist }: { playlist: any }) => {
         </div>
         <h1 style={{ margin: 'auto' }}>{name}</h1>
       </div>
-      {tracksVisible && <Tracklist tracks={items} />}
+      {tracksVisible && <Tracklist tracks={items.map((item) => item.track)} />}
     </div>
   );
 };
