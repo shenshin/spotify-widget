@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './Widget.module.scss';
 import Playlist from './Playlist/Playlist';
 
 const Widget = () => {
   const [error, setError] = useState('');
-  const [token, setToken] = useState('');
   const [playlists, setPlaylists] = useState(Array);
 
   async function retrieveToken() {
@@ -18,19 +17,19 @@ const Widget = () => {
     });
     if (!response.ok) throw new Error(`Error retrieving token: ${response.statusText}`);
     const tokenData = await response.json();
-    setToken(tokenData.access_token);
+    return tokenData.access_token;
   }
 
-  const retrievePlaylist = useCallback(async (playlist: string) => {
+  async function retrievePlaylist(playlist: string, accessToken: string) {
     const response = await fetch(`https://api.spotify.com/v1/playlists/${playlist}`, {
       method: 'get',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     if (!response.ok) throw new Error(`Error retrieving playlist: ${response.statusText}`);
     return response.json();
-  }, [token]);
+  }
 
   useEffect(() => {
     (async () => {
@@ -41,14 +40,16 @@ const Widget = () => {
       ];
       try {
         setError('');
-        await retrieveToken();
-        const playlistData = await Promise.all(playListIDs.map((id) => retrievePlaylist(id)));
+        const accessToken = await retrieveToken();
+        const playlistData = await Promise.all(
+          playListIDs.map((id) => retrievePlaylist(id, accessToken)),
+        );
         setPlaylists(playlistData);
       } catch (err) {
         setError(err.message);
       }
     })();
-  }, [retrievePlaylist]);
+  }, []);
 
   return (
     <div className={style.widget}>
