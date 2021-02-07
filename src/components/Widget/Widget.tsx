@@ -20,8 +20,8 @@ const Widget = () => {
     return tokenData.access_token;
   }
 
-  async function retrievePlaylist(playlist: string, accessToken: string) {
-    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlist}`, {
+  async function retrievePlaylist(playlistID: string, accessToken: string) {
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
       method: 'get',
       headers: {
         Authorization: `Bearer ${accessToken}`,
