@@ -3,6 +3,7 @@ import style from './SpotifyWidget.module.scss';
 import retrieveToken from './util/retrieveToken';
 import Playlist from './Playlist/Playlist';
 import PlaylistType from './Playlist/PlaylistType';
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 
 async function retrievePlaylist(playlistID: string, accessToken: string) {
   const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
@@ -46,7 +47,7 @@ const SpotifyWidget = () => {
   return (
     <div className={style.widget}>
       {error && <p className="error-message">{error}</p>}
-      {loading && <p>Loading...</p>}
+      {loading && <LoadingSpinner />}
       {!error && !loading && playlists.map((playlist: PlaylistType) => (
         <Playlist key={playlist.id} playlist={playlist} />
       ))}

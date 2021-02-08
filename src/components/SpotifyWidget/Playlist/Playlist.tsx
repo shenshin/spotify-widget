@@ -5,6 +5,7 @@ import style from './Playlist.module.scss';
 import PlaylistType from './PlaylistType';
 import ArtistType from '../Artist/ArtistType';
 import retrieveToken from '../util/retrieveToken';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 async function retrieveArtist(artistURL: string, accessToken: string) {
   const response = await fetch(artistURL, {
@@ -73,7 +74,7 @@ const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
         <h1>{name}</h1>
 
         <div>
-          {artistDataLoading && <p>Loading...</p>}
+          {artistDataLoading && <LoadingSpinner />}
           {artistFetchError && <p className="error-message">{artistFetchError}</p>}
           {fetchedArtist
             && !artistDataLoading
