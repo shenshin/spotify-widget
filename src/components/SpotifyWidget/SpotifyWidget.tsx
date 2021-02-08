@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import style from './SpotifyWidget.module.scss';
+import retrieveToken from './util/retrieveToken';
 import Playlist from './Playlist/Playlist';
 import PlaylistType from './Playlist/PlaylistType';
-
-async function retrieveToken() {
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      Authorization: `Basic ${process.env.REACT_APP_ACCESS_TOKEN}`,
-    },
-    body: 'grant_type=client_credentials',
-  });
-  if (!response.ok) throw new Error(`Error retrieving token: ${response.statusText}`);
-  const { access_token: tokenData } = await response.json();
-  return tokenData;
-}
 
 async function retrievePlaylist(playlistID: string, accessToken: string) {
   const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
