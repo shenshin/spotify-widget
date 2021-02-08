@@ -3,13 +3,13 @@ import style from './ArtistLink.module.scss';
 
 const ArtistLink = ({ artist, showArtist, isLastArtist }: {
   artist: ArtistType,
-  showArtist: (arg: ArtistType) => void,
+  showArtist: (url: string) => void,
   isLastArtist: boolean,
 }) => (
   <>
     <span
       className={style.artistLink}
-      onClick={() => showArtist(artist)}
+      onClick={() => showArtist(artist.href)}
       onKeyDown={() => {}}
       role="button"
       tabIndex={-1}

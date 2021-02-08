@@ -3,7 +3,6 @@ import Tracklist from '../Tracklist/Tracklist';
 import Artist from '../Artist/Artist';
 import style from './Playlist.module.scss';
 import PlaylistType from './PlaylistType';
-import ArtistType from '../Artist/ArtistType';
 import retrieveToken from '../util/retrieveToken';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
@@ -18,45 +17,52 @@ async function retrieveArtist(artistURL: string, accessToken: string) {
   return response.json();
 }
 
+interface ArtistData {
+  name: string;
+  images: {
+    url: string;
+  }[];
+}
+
 const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
   const {
     name, description, images: [{ url: playlistImageURL }], tracks: { items },
   } = playlist;
 
   const [tracksVisible, setTracksVisible] = useState(false);
-  const [selectedArtist, setSelectedArtist] = useState<ArtistType>();
+  const [artistURL, setArtistURL] = useState('');
 
-  const [fetchedArtist, setFetchedArtist] = useState();
-  const [artistFetchError, setAtristFetchError] = useState('');
-  const [artistDataLoading, setArtistDataLoading] = useState(false);
+  const [artist, setArtist] = useState<ArtistData>();
+  const [artistError, setAtristError] = useState('');
+  const [artistLoading, setArtistLoading] = useState(false);
 
   const showTracks = () => {
     setTracksVisible(!tracksVisible);
-    setSelectedArtist(undefined);
-    setFetchedArtist(undefined);
+    setArtistURL('');
+    setArtist(undefined);
   };
 
-  const showArtist = (artist: ArtistType) => {
-    setSelectedArtist(artist);
+  const showArtist = (url: string) => {
+    setArtistURL(url);
   };
 
   useEffect(() => {
     (async () => {
       try {
-        if (selectedArtist) {
-          setAtristFetchError('');
-          setArtistDataLoading(true);
+        if (artistURL) {
+          setAtristError('');
+          setArtistLoading(true);
           const accessToken = await retrieveToken();
-          const artistInfo = await retrieveArtist(selectedArtist.href, accessToken);
-          setFetchedArtist(artistInfo);
+          const artistInfo = await retrieveArtist(artistURL, accessToken);
+          setArtist(artistInfo);
         }
       } catch (err) {
-        setAtristFetchError(err.message);
+        setAtristError('Could not load artist data');
       } finally {
-        setArtistDataLoading(false);
+        setArtistLoading(false);
       }
     })();
-  }, [selectedArtist]);
+  }, [artistURL]);
 
   return (
     <div className={style.playlist}>
@@ -74,12 +80,17 @@ const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
         <h1>{name}</h1>
 
         <div>
-          {artistDataLoading && <LoadingSpinner />}
-          {artistFetchError && <p className="error-message">{artistFetchError}</p>}
-          {fetchedArtist
-            && !artistDataLoading
-            && !artistFetchError
-            && <Artist artist={fetchedArtist} />}
+          {artistLoading && <LoadingSpinner />}
+          {artistError && <p className="error-message">{artistError}</p>}
+          {artist
+            && !artistLoading
+            && !artistError
+            && (
+            <Artist
+              name={artist.name}
+              imageURLs={artist.images.map((image) => image.url)}
+            />
+            )}
         </div>
       </div>
       {tracksVisible && (

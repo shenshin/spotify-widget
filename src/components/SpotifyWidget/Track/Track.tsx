@@ -1,11 +1,10 @@
-import ArtistType from '../Artist/ArtistType';
 import style from './Track.module.scss';
 import TrackType from './TrackType';
 import ArtistLink from './ArtistLink/ArtistLink';
 
 const Track = ({ track, showArtist }: {
   track: TrackType,
-  showArtist: (artist: ArtistType) => void,
+  showArtist: (url: string) => void,
 }) => {
   const { name: trackName, artists } = track;
   function isLastArtist(index: number): boolean {
