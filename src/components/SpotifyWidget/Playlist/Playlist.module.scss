@@ -1,31 +1,45 @@
 .playlist {
-  margin-bottom: 0.3rem;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border-bottom: 1px solid var(--border);
 
   &:last-child {
     margin-bottom: 0;
     border-bottom: none;
   }
 }
+
 .bigButton {
   cursor: pointer;
   display: flex;
   align-items: center;
 
-  div {
-    width: 6rem;
-    margin-bottom: 0.5rem;
-
-    h3 {
-      width: max-content;
-    }
-    img {
-      width: 100%;
-      border-radius: 0.3rem;
-    }
-  }
-
   h1 {
     margin: auto;
+    color: var(--headers-light-text);
+    font-weight: 500;
+  }
+}
+
+.playlistImage {
+  margin-right: 0.3rem;
+  position: relative;
+  height: 6rem;
+  border-radius: 5px;
+  overflow: hidden;
+
+  h3 {
+    position: absolute;
+    left: 3px;
+    $indent: 1px;
+    $blur: 5px;
+    text-shadow: $indent $indent $blur white, 
+                #{-$indent} #{-$indent} $blur white,
+                $indent #{-$indent} $blur white,
+                #{-$indent} $indent $blur white;
+    color: var(--body-background)
+  }
+  img {
+    height: 100%;
   }
 }

@@ -28,9 +28,11 @@ const Playlist = ({ playlist }: { playlist: PlaylistType }): JSX.Element => {
   const {
     name, description, images: [{ url: playlistImageURL }], tracks: { items },
   } = playlist;
+  const randomArtistIndex: number = Math.floor(Math.random() * items.length);
+  const randomArtistURL: string = items[randomArtistIndex].track.artists[0].href;
 
   const [tracksVisible, setTracksVisible] = useState<boolean>(false);
-  const [artistURL, setArtistURL] = useState<string>();
+  const [artistURL, setArtistURL] = useState<string>(randomArtistURL);
 
   const [artist, setArtist] = useState<ArtistData>();
   const [artistError, setAtristError] = useState<string>();
@@ -38,8 +40,6 @@ const Playlist = ({ playlist }: { playlist: PlaylistType }): JSX.Element => {
 
   const showTracks = (): void => {
     setTracksVisible(!tracksVisible);
-    setArtistURL('');
-    setArtist(undefined);
   };
 
   const showArtist = (url: string): void => {
@@ -73,32 +73,29 @@ const Playlist = ({ playlist }: { playlist: PlaylistType }): JSX.Element => {
         tabIndex={-1}
         className={style.bigButton}
       >
-        <div>
+        <div className={style.playlistImage}>
           <h3>{`${items.length} tracks`}</h3>
           <img src={playlistImageURL} alt={description} />
         </div>
         <h1>{name}</h1>
 
-        <div>
-          {artistLoading && <LoadingSpinner />}
-          {artistError && <p className="error-message">{artistError}</p>}
-          {artist
+        {(artistLoading || artistError) && <LoadingSpinner />}
+        {artist
             && !artistLoading
             && !artistError
             && (
             <Artist
               name={artist.name}
               imageURLs={artist.images.map((image) => image.url)}
+              expanded={tracksVisible}
             />
             )}
-        </div>
       </div>
-      {tracksVisible && (
       <Tracklist
         showArtist={showArtist}
         tracks={items.map((item) => item.track)}
+        expanded={tracksVisible}
       />
-      )}
     </div>
   );
 };

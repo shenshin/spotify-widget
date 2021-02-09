@@ -1,4 +1,8 @@
 .artistLink {
   cursor: pointer;
   text-decoration: underline;
+  color: var(--light-text);
+  &:hover {
+    color: var(--headers-light-text);
+  }
 }

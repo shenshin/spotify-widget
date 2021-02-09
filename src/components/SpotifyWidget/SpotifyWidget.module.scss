@@ -1,7 +1,11 @@
 .widget {
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   color: var(--theme-page-text);
   background-color: var(--theme-page-background);
   font-family: 'Lora', serif;
-  border-radius: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0.5rem var(--borders-background);
+  background-color: var(--section-background);
 }

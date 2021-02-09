@@ -1,9 +1,31 @@
 .light {
   --theme-page-background: #FFF;
   --theme-page-text: #111;
+
+  --section-background: #1d1e2e;
+  --tracks-background: #1a1b29;
+  --body-background: #171623;
+  --borders-background: #14141f;
+  --headers-light-text: #fff;
+  --headers-dark-text: #8c8c8c;
+  --light-text: #cacacf;
+  --dark-text: #596269;
+  --border: #2e303f;
+  --error-background: #52002d;
 }
 
 .dark {
   --theme-page-background: #191919;
   --theme-page-text: #FFF;
+
+  --section-background: #1d1e2e;
+  --tracks-background: #13131f;
+  --body-background: #171623;
+  --borders-background: #14141f;
+  --headers-light-text: #fff;
+  --headers-dark-text: #8c8c8c;
+  --light-text: #cacacf;
+  --dark-text: #596269;
+  --border: #2e303f;
+  --error-background: #52002d;
 }

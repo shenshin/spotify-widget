@@ -3,6 +3,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  color: var(--headers-light-text);
+  font-weight: 100;
 }
 
 .switch {
@@ -15,7 +17,7 @@
   width: $width;
   height: $height;
   border-radius: $height / 2;
-  border: 1px solid var(--theme-page-background);
+  border: 0.5px solid var(--headers-dark-text);
   & input {
     /* Hide default HTML checkbox */
     display: none;
@@ -41,7 +43,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--theme-page-text);
+  background-color: var(--section-background);
   -webkit-transition: .4s;
   transition: .4s;
 
@@ -52,7 +54,7 @@
     width: $size;
     left: $size / 10;
     bottom: $size / 10;
-    background-color: var(--theme-page-background);
+    background-color: var(--headers-dark-text);
     -webkit-transition: .4s;
     transition: .4s;
   }

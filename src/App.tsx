@@ -13,7 +13,7 @@ const App = (): JSX.Element => {
   };
 
   return (
-    <div className={theme}>
+    <div className={`${theme} App`}>
       <ThemeSwitch theme={theme} switchTheme={switchTheme} />
       <h1>Spotify Widget</h1>
       <SpotifyWidget />

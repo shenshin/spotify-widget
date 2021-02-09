@@ -1,0 +1,16 @@
+$size: 6rem;
+$radius: 5px;
+.artist {
+  margin-left: 0.3rem;
+  width: $size;
+  height: $size;
+  border-radius: $radius;
+  color: var(--light-text);
+  img {
+    width: $size;
+    border-radius: $radius;
+  }
+}
+.minimized {
+  overflow: hidden;
+}

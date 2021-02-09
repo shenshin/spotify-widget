@@ -1,9 +1,8 @@
 .lds-spinner {
-  color: var(--theme-page-background);
-  margin: auto;
   position: relative;
-  width: 80px;
-  height: 80px;
+  $size: 6rem;
+  width: $size;
+  height: $size;
 
   div {
     transform-origin: 40px 40px;
@@ -18,7 +17,7 @@
       width: 6px;
       height: 18px;
       border-radius: 20%;
-      background: var(--theme-page-text);
+      background: var(--dark-text);
     }
 
     @for $i from 0 through 11 {
