@@ -1,11 +1,16 @@
 .tracklist {
-  margin-top: 0.5rem;
+  margin: 0.5rem 7rem 0 0;
   padding: 0.5rem 2.2rem;
   height: 10rem;
   overflow: auto;
+  border-radius: 5px;
   font-size: 0.8rem;
   color: var(--dark-text);
   background-color: var(--tracks-background);
+
+  @media screen and (max-width: 600px) {
+      background-color: unset;
+  }
 }
 .visible {
   display: block;

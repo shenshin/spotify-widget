@@ -1,4 +1,4 @@
-/* The switch - the box around the slider */
+/* The box around the slider */
 .theme-switch {
   display: flex;
   justify-content: flex-end;
@@ -33,7 +33,6 @@
   }
 }
 
-/* The slider */
 .slider {
   $size: 20px;
   
