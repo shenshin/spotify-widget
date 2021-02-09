@@ -3,7 +3,7 @@ import styles from './ThemeSwitch.module.scss';
 
 const ThemeSwitch = ({
   switchTheme, theme,
-}: { switchTheme: (e: boolean) => void, theme: ThemeType }) => {
+}: { switchTheme: (e: boolean) => void, theme: ThemeType }): JSX.Element => {
   const oppositeTheme: ThemeType = theme === ThemeType.light ? ThemeType.dark : ThemeType.light;
   return (
     <div className={styles['theme-switch']}>

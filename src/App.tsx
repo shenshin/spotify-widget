@@ -5,10 +5,10 @@ import ThemeSwitch from './components/ThemeSwitch/ThemeSwitch';
 import SpotifyWidget from './components/SpotifyWidget/SpotifyWidget';
 import ThemeType from './ThemeType';
 
-const App = () => {
-  const [theme, setTheme] = useState(ThemeType.light);
+const App = (): JSX.Element => {
+  const [theme, setTheme] = useState<ThemeType>(ThemeType.light);
 
-  const switchTheme = (isDark: boolean) => {
+  const switchTheme = (isDark: boolean): void => {
     setTheme(isDark ? ThemeType.dark : ThemeType.light);
   };
 

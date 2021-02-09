@@ -1,4 +1,4 @@
-async function retrieveToken() {
+async function retrieveToken(): Promise<string> {
   const response = await fetch('https://accounts.spotify.com/api/token', {
     method: 'post',
     headers: {
@@ -8,7 +8,7 @@ async function retrieveToken() {
     body: 'grant_type=client_credentials',
   });
   if (!response.ok) throw new Error(`Error retrieving token: ${response.statusText}`);
-  const { access_token: tokenData } = await response.json();
+  const { access_token: tokenData }: { 'access_token': string } = await response.json();
   return tokenData;
 }
 export default retrieveToken;

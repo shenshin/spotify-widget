@@ -5,7 +5,7 @@ import ArtistLink from './ArtistLink/ArtistLink';
 const Track = ({ track, showArtist }: {
   track: TrackType,
   showArtist: (url: string) => void,
-}) => {
+}): JSX.Element => {
   const { name: trackName, artists } = track;
   function isLastArtist(index: number): boolean {
     return index === artists.length - 1;

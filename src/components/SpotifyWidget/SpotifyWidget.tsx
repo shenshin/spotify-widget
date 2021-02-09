@@ -5,7 +5,7 @@ import Playlist from './Playlist/Playlist';
 import PlaylistType from './Playlist/PlaylistType';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 
-async function retrievePlaylist(playlistID: string, accessToken: string) {
+async function retrievePlaylist(playlistID: string, accessToken: string): Promise<PlaylistType> {
   const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
     method: 'get',
     headers: {
@@ -16,9 +16,9 @@ async function retrievePlaylist(playlistID: string, accessToken: string) {
   return response.json();
 }
 
-const SpotifyWidget = () => {
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+const SpotifyWidget = (): JSX.Element => {
+  const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [playlists, setPlaylists] = useState<Array<PlaylistType>>(Array);
 
   useEffect(() => {

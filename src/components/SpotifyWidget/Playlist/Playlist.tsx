@@ -6,7 +6,14 @@ import PlaylistType from './PlaylistType';
 import retrieveToken from '../util/retrieveToken';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
-async function retrieveArtist(artistURL: string, accessToken: string) {
+interface ArtistData {
+  name: string;
+  images: {
+    url: string;
+  }[];
+}
+
+async function retrieveArtist(artistURL: string, accessToken: string): Promise<ArtistData> {
   const response = await fetch(artistURL, {
     method: 'get',
     headers: {
@@ -17,32 +24,25 @@ async function retrieveArtist(artistURL: string, accessToken: string) {
   return response.json();
 }
 
-interface ArtistData {
-  name: string;
-  images: {
-    url: string;
-  }[];
-}
-
-const Playlist = ({ playlist }: { playlist: PlaylistType }) => {
+const Playlist = ({ playlist }: { playlist: PlaylistType }): JSX.Element => {
   const {
     name, description, images: [{ url: playlistImageURL }], tracks: { items },
   } = playlist;
 
-  const [tracksVisible, setTracksVisible] = useState(false);
-  const [artistURL, setArtistURL] = useState('');
+  const [tracksVisible, setTracksVisible] = useState<boolean>(false);
+  const [artistURL, setArtistURL] = useState<string>();
 
   const [artist, setArtist] = useState<ArtistData>();
-  const [artistError, setAtristError] = useState('');
-  const [artistLoading, setArtistLoading] = useState(false);
+  const [artistError, setAtristError] = useState<string>();
+  const [artistLoading, setArtistLoading] = useState<boolean>(false);
 
-  const showTracks = () => {
+  const showTracks = (): void => {
     setTracksVisible(!tracksVisible);
     setArtistURL('');
     setArtist(undefined);
   };
 
-  const showArtist = (url: string) => {
+  const showArtist = (url: string): void => {
     setArtistURL(url);
   };
 

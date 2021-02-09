@@ -5,7 +5,7 @@ const ArtistLink = ({ artist, showArtist, isLastArtist }: {
   artist: ArtistType,
   showArtist: (url: string) => void,
   isLastArtist: boolean,
-}) => (
+}): JSX.Element => (
   <>
     <span
       className={style.artistLink}
